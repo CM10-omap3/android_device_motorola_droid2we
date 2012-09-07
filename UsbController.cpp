@@ -32,12 +32,12 @@ UsbController::~UsbController() {
 }
 
 int UsbController::startRNDIS() {
-    LOGD("Usb RNDIS start");
+    ALOGD("Usb RNDIS start");
     return enableRNDIS(true);
 }
 
 int UsbController::stopRNDIS() {
-    LOGD("Usb RNDIS stop");
+    ALOGD("Usb RNDIS stop");
     return enableRNDIS(false);
 }
 
@@ -60,10 +60,10 @@ bool UsbController::isRNDISStarted() {
 
         memset(buffer, 0, sizeof(buffer));
         if (fread(buffer, 1, sizeof(buffer), stateFile) > 0) {
-            LOGD("Got USBD state %s", buffer);
+            ALOGD("Got USBD state %s", buffer);
             rndisActive = strstr(buffer, "rndis") != NULL;
         } else {
-            LOGD("Could not read USBD state file (errno %d)", errno);
+            ALOGD("Could not read USBD state file (errno %d)", errno);
         }
 
         fclose(stateFile);

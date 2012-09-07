@@ -68,7 +68,7 @@ int SensorISL29030P::enable(int32_t handle, int en)
     err = ioctl(dev_fd, ISL29030_IOCTL_SET_ENABLE, &newState);
     err = err < 0 ? -errno : 0;
 
-    LOGE_IF(err, "SensorISL29030P: ISL29030_IOCTL_SET_ENABLE failed (%s)", strerror(-err));
+    ALOGE_IF(err, "SensorISL29030P: ISL29030_IOCTL_SET_ENABLE failed (%s)", strerror(-err));
 
     if (!err || !newState)
         mEnabled = newState;
@@ -107,7 +107,7 @@ int SensorISL29030P::readEvents(sensors_event_t* data, int count)
         }
         else
         {
-            LOGE("SensorISL29030P: unknown event (type=%d, code=%d, value=%d)", type, event->code, event->value);
+            ALOGE("SensorISL29030P: unknown event (type=%d, code=%d, value=%d)", type, event->code, event->value);
         }
         mInputReader.next();
     }
@@ -133,7 +133,7 @@ int SensorISL29030P::isEnabled()
     err = ioctl(dev_fd, ISL29030_IOCTL_GET_ENABLE, &enabled);
     err = err < 0 ? -errno : 0;
 
-    LOGE_IF(err, "SensorISL29030P: ISL29030_IOCTL_GET_ENABLE failed (%s)", strerror(-err));
+    ALOGE_IF(err, "SensorISL29030P: ISL29030_IOCTL_GET_ENABLE failed (%s)", strerror(-err));
 
     return enabled;
 }
@@ -191,7 +191,7 @@ int SensorISL29030L::readEvents(sensors_event_t* data, int count)
         }
         else
         {
-            LOGE("SensorISL29030L: unknown event (type=%d, code=%d, value=%d)", type, event->code, event->value);
+            ALOGE("SensorISL29030L: unknown event (type=%d, code=%d, value=%d)", type, event->code, event->value);
         }
         mInputReader.next();
     }

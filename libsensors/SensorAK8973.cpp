@@ -101,7 +101,7 @@ int SensorAK8973::enable(int32_t handle, int en)
         err = ioctl(dev_fd, cmd, &flags);
         err = err < 0 ? -errno : 0;
 
-        LOGE_IF(err, "ECS_IOCTL_APP_SET_XXX failed (%s)", strerror(-err));
+        ALOGE_IF(err, "ECS_IOCTL_APP_SET_XXX failed (%s)", strerror(-err));
 
         if (!err)
         {
@@ -220,7 +220,7 @@ int SensorAK8973::readEvents(sensors_event_t* data, int count)
         }
         else
         {
-            LOGE("SensorAK8973: unknown event (type=%d, code=%d, value=%d)", type, event->code, event->value);
+            ALOGE("SensorAK8973: unknown event (type=%d, code=%d, value=%d)", type, event->code, event->value);
             mInputReader.next();
         }
     }
